@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Codigo profesores/AppConsola2/AppConsola2/src"/>
+	<classpathentry kind="src" path="Codigo profesores/AppConsola3/src"/>
+	<classpathentry kind="src" path="Codigo profesores/AppConsola4 (1)/AppConsola4/src"/>
+	<classpathentry kind="src" path="Codigo profesores/Archivos_Threads/AppConsola7/src"/>
+	<classpathentry kind="src" path="Codigo profesores/Exception/AppConsola6/src"/>
+	<classpathentry kind="src" path="Practica de los videos/re_tp1/src"/>
+	<classpathentry kind="src" path="Practica de los videos/re_tp2/src"/>
+	<classpathentry kind="src" path="Practica de los videos/TP3_GRUPO_1985/src"/>
+	<classpathentry kind="output" path="Codigo profesores/AppConsola2/AppConsola2/bin"/>
+</classpath>

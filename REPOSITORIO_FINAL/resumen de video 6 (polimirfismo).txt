@@ -1,0 +1,35 @@
+Polimorfismo: 
+se puede guardar un objeto de la clase hija en una clase padre 
+por ejemplo 
+
+Animal xxx = new Perro(); 
+
+*****************************   otro ejemplo ************************************
+
+public static void main (String[] args) {°
+
+Animal animal = new Animal("Animal");
+Gato gato = new Gato("Pepita");
+Perro perro = new Perro("huesos","galgo");
+
+Animal[] animales = new Animal[3];
+animales[0] = animal; 
+animales[1] = perro; 
+animales[2] = gato;
+
+for(Animal a : animales) {
+System.out.println(a.toString);
+} 
+ 
+}°
+
+******************************  resultado por pantalla **************************
+
+ES UN ANIMAL, SU NOMBRE ES: Animal 
+ES UN GATO, SE LLAMA: Pepita
+ES UN PERRO, SU NOMBRE ES: huesos Y SU RAZA ES: Galgo
+
+*********************************************************************************
+
+
+
