@@ -228,3 +228,4 @@ public class Promedios extends JFrame{
 		panelSuperior.add(lblTps);	
 	}
 }
+// actualizacion desde latop 
