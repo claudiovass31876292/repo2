@@ -10,13 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-import javax.swing.UIManager;
 
 public class Promedios extends JFrame{
 
@@ -35,6 +33,9 @@ public class Promedios extends JFrame{
 	private JLabel lblTps;
 	private JLabel lblPromedio;
 	private JLabel lblCondicion;
+	private JButton btnCalcular;
+	private JButton btnNuevo;
+	JButton btnSalir;
 	private JTextField txtPromedio;
 	private JTextField txtCondicion;
 	
@@ -42,48 +43,40 @@ public class Promedios extends JFrame{
 	
 	public Promedios() {
 		setTitle("Promedios");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 515, 413);
 		contentPane = new JPanel();
-		contentPane.setForeground(Color.MAGENTA);
-		contentPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panelInferior = new JPanel();
-		panelInferior.setForeground(Color.MAGENTA);
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Notas del estudiante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(null, "Notas del alumno", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelInferior.setBackground(Color.WHITE);
 		panelInferior.setBounds(22, 208, 268, 155);
 		contentPane.add(panelInferior);
 		panelInferior.setLayout(null);
 		
 		lblPromedio = new JLabel("Promedio");
-		lblPromedio.setBounds(10, 44, 87, 24);
+		lblPromedio.setBounds(10, 30, 46, 14);
 		panelInferior.add(lblPromedio);
 		
 		lblCondicion = new JLabel("Condicion");
-		lblCondicion.setBounds(10, 100, 46, 14);
+		lblCondicion.setBounds(10, 69, 46, 14);
 		panelInferior.add(lblCondicion);
 		
 		txtPromedio = new JTextField();
-		txtPromedio.setText("Promedio");
-		txtPromedio.setBounds(107, 46, 108, 20);
+		txtPromedio.setBounds(117, 27, 100, 20);
 		panelInferior.add(txtPromedio);
 		txtPromedio.setColumns(10);
 		
 		txtCondicion = new JTextField();
-		txtCondicion.setText("Condicion");
-		txtCondicion.setBounds(107, 97, 108, 20);
+		txtCondicion.setBounds(117, 66, 100, 20);
 		panelInferior.add(txtCondicion);
 		txtCondicion.setColumns(10);
-		panelInferior.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblPromedio, lblCondicion, txtPromedio, txtCondicion}));
 		
 		panelSuperior = new JPanel();
-		panelSuperior.setForeground(Color.MAGENTA);
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Notas del estudiante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelSuperior.setBackground(Color.WHITE);
-		panelSuperior.setBounds(22, 11, 268, 176);
+		panelSuperior.setBounds(22, 60, 268, 137);
 		contentPane.add(panelSuperior);
 		panelSuperior.setLayout(null);
 		//panelSuperior.add( creaBorde( new TitledBorder("Notas del alumno") ) );
@@ -109,25 +102,40 @@ public class Promedios extends JFrame{
 		cbTps.setBounds(109, 98, 103, 20);
 		panelSuperior.add(cbTps);
 		
-		JButton btnCalcular = new JButton("CALCULAR ");
+		btnCalcular = new JButton("CALCULAR ");
 		btnCalcular.addActionListener(new eventoCalcular());
 		btnCalcular.setBounds(319, 60, 123, 35);
 		contentPane.add(btnCalcular);
 		
-		JButton btnNuevo = new JButton("NUEVO");
+		btnNuevo = new JButton("NUEVO");
+		btnNuevo.addActionListener(new eventoNuevo());
 		btnNuevo.setBounds(319, 99, 123, 35);
 		contentPane.add(btnNuevo);
 		
-		JButton btnNewButton_2 = new JButton("SALIR");
-		btnNewButton_2.setBounds(319, 141, 123, 35);
-		contentPane.add(btnNewButton_2);
-		cbTps.addItem("tp1");
-		cbTps.addItem("tp2");
-		cbTps.addItem("tp3");
+		btnSalir = new JButton("SALIR");
+		btnSalir.addActionListener(new eventoSalir());
+		btnSalir.setBounds(319, 141, 123, 35);
+		contentPane.add(btnSalir);
+		cbTps.addItem("APROBADO");
+		cbTps.addItem("DESAPROBADO");
 		
 		creacionLabel();
 	}
+
+	private boolean isInt(String str) {
+		try 
+		{
+		Integer.parseInt(str);
+		return true;
+		}
+		catch (Throwable e )
+		{
+			return false;
+		}
 	
+	}
+
+
 	/*static JPanel creaBorde( javax.swing.border.Border b ) {
 	    JPanel panel = new JPanel();
 	    String str = b.getClass().toString();
@@ -145,18 +153,62 @@ public class Promedios extends JFrame{
 	
 			public void actionPerformed(ActionEvent arg0) {
 		    
-				// aca tiene desplegar los resultados en el panelInferior
-				System.out.println("aca tiene desplegar los resultados en el panelInferior");
-				int promedio = Integer.parseInt(txtNota1.getText()+txtNota2.getText()+txtNota3.getText());
-				System.out.println(promedio);
-				String promedioString = promedio+"";
-				txtCondicion.setText(promedioString);
+				String n1 = txtNota1.getText().trim();
+				String n2 = txtNota2.getText().trim();
+				String n3 = txtNota3.getText().trim();
 				
+				if(n1.isEmpty() || n2.isEmpty() || n3.isEmpty())
+				{
+				 JOptionPane.showMessageDialog(contentPane, "Complete todos los campos","Error", JOptionPane.ERROR_MESSAGE);
+				 return;
+				}
+				
+				if(!isInt(n1) || !isInt(n2) || !isInt(n3))
+				{
+					JOptionPane.showMessageDialog(contentPane, "Ingrese un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				float nota1 = Integer.parseInt(n1);
+				float nota2 = Integer.parseInt(n2);
+				float nota3 = Integer.parseInt(n3);
+				float prom = (nota1+nota2+nota3)/3;
+				txtPromedio.setText(prom+"");
 				
 			}
-		
+
 	}
 	
+      public class eventoNuevo implements ActionListener
+      {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			txtNota1.setText("");
+			txtNota2.setText("");
+			txtNota3.setText("");
+			txtCondicion.setText("");
+			txtPromedio.setText("");
+			
+		}
+    	  
+      }
+
+      public class eventoSalir implements ActionListener
+      {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			// hacer que cierre la ventana al clikeat el boton 
+		System.exit(JFrame.DISPOSE_ON_CLOSE);
+		
+			
+		}
+    	  
+      }
+      
 	public void creacionLabel()
 	{
 		lblNota1 = new JLabel("Nota 1 :");
@@ -174,6 +226,5 @@ public class Promedios extends JFrame{
 		lblTps = new JLabel("TPS");
 		lblTps.setBounds(10, 101, 46, 14);
 		panelSuperior.add(lblTps);	
-		panelSuperior.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNota1, txtNota2, txtNota3, cbTps, lblNota1, lblNota2, lblNota3, lblTps}));
 	}
 }
