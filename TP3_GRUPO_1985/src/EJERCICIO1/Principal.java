@@ -18,7 +18,7 @@ public class Principal {
 		catch(DniIvalido e)
 		{
 		  // ESTA LINEA SOLO TE AGREGA UN COMENTARIO INNECESARIO 	System.out.println("Error falta arroba ");
-			e.printStackTrace();
+			e.printStackTrace(System.out);
 		}
 	}
 }
