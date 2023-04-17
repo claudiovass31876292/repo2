@@ -805,3 +805,6 @@ org.eclipse.core.internal.resources.ResourceException: A resource exists with a 
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
 !SUBENTRY 1 org.eclipse.core.resources 4 275 2023-04-16 21:37:17.766
 !MESSAGE A resource exists with a different case: '/REPOSITORIO_FINAL/Codigo profesores/AppConsola2/AppConsola2/bin/Ejercicio1'.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2023-04-16 21:49:49.592
+!MESSAGE No repository found at http://download.eclipse.org.
