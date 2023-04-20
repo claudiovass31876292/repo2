@@ -122,6 +122,7 @@ public class Promedios extends JFrame{
 		creacionLabel();
 	}
 
+	//clase para validar que sea un caracter numerico lo que se ingresa
 	private boolean isInt(String str) {
 		try 
 		{
@@ -136,18 +137,7 @@ public class Promedios extends JFrame{
 	}
 
 
-	/*static JPanel creaBorde( javax.swing.border.Border b ) {
-	    JPanel panel = new JPanel();
-	    String str = b.getClass().toString();
-	    
-	    str = str.substring( str.lastIndexOf('.') + 1 );
-	    panel.setLayout( new BorderLayout() );
-	    panel.add(new JLabel( str,JLabel.CENTER ),BorderLayout.CENTER );
-	    panel.setBorder( b );
-	    
-	    return( panel );
-	  }
-	*/
+	
       public class eventoCalcular implements ActionListener
 	{
 	
@@ -165,7 +155,7 @@ public class Promedios extends JFrame{
 				
 				if(!isInt(n1) || !isInt(n2) || !isInt(n3))
 				{
-					JOptionPane.showMessageDialog(contentPane, "Ingrese un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Ingrese solo valores numericos","Error",JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
@@ -173,8 +163,43 @@ public class Promedios extends JFrame{
 				float nota2 = Integer.parseInt(n2);
 				float nota3 = Integer.parseInt(n3);
 				float prom = (nota1+nota2+nota3)/3;
-				txtPromedio.setText(prom+"");
 				
+				//aca preguntar si alguna de las notas es menor a 6
+				// siendo asi quedara libre por mas que haya aprobado el tp
+				
+				String valorCB = cbTps.getSelectedItem().toString();
+				
+				if(nota1 <6 || nota2 <6 || nota3 <6) 
+					{
+					txtCondicion.setText("LIBRE");
+					txtPromedio.setText(prom+"");
+					
+					}
+				else
+				{
+					if(valorCB == "APROBADO") 
+					{
+						if(prom == 6 || prom == 7 || prom < 8)
+						{
+							txtCondicion.setText("REGULAR");
+							
+						}
+						else 
+						{
+							if(valorCB == "DESAPROBADO")
+							{
+								txtCondicion.setText("LIBRE");
+							}
+						}
+						
+					}
+					else
+					{
+						txtCondicion.setText("LIBRE");
+					}
+					
+				}
+										
 			}
 
 	}
