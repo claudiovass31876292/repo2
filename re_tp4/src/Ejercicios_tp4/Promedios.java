@@ -171,7 +171,7 @@ public class Promedios extends JFrame{
 				
 				if(nota1 <6 || nota2 <6 || nota3 <6) 
 					{
-					txtCondicion.setText("LIBRE");
+					txtCondicion.setText("LIBRE 1");
 					txtPromedio.setText(prom+"");
 					
 					}
@@ -179,26 +179,46 @@ public class Promedios extends JFrame{
 				{
 					if(valorCB == "APROBADO") 
 					{
-						if(prom == 6 || prom == 7 || prom < 8)
+						if(nota1 == 6 || nota1 == 7 || nota1 == 8 || nota2 == 6 || nota2 == 7 || nota2 == 8 || nota3 == 6 || nota3 == 7 || nota3 == 8 )
 						{
-							txtCondicion.setText("REGULAR");
+							txtPromedio.setText(prom+"");
+							txtCondicion.setText("REGULAR 2");
 							
 						}
 						else 
 						{
 							if(valorCB == "DESAPROBADO")
 							{
-								txtCondicion.setText("LIBRE");
+								if(nota1 == 6 || nota1 == 7 || nota1 == 8 || nota2 == 6 || nota2 == 7 || nota2 == 8 || nota3 == 6 || nota3 == 7 || nota3 == 8 )
+								{
+									txtPromedio.setText(prom+"");
+									txtCondicion.setText("LIBRE 3");
+								}
+								
 							}
 						}
 						
 					}
-					else
+						
+				}
+				if(nota1>7 && nota2>7 && nota3>7)
+				{
+					if(valorCB == "APROBADO")
 					{
-						txtCondicion.setText("LIBRE");
+						txtPromedio.setText(prom+"");
+						txtCondicion.setText("PROMOCIONADO 4");
+	
+					}
+					if(valorCB == "DESAPROBADO")
+					{
+						txtPromedio.setText(prom+"");
+						txtCondicion.setText("DESAPROBADO 5");
+
 					}
 					
 				}
+															
+			
 										
 			}
 
